@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 
@@ -8,13 +10,13 @@ namespace DotNet.ConsoleApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Application Insights Demo");
+            Console.WriteLine("=========================");
+            Console.WriteLine();
+
+            var telemetryClient = new TelemetryClient();
             using (Program.GetApplicationInsightsModule())
             {
-                Console.WriteLine("Application Insights Demo");
-                Console.WriteLine("=========================");
-                Console.WriteLine();
-
-
                 while (true)
                 {
                     Console.WriteLine("<1>: Buy");
@@ -24,19 +26,23 @@ namespace DotNet.ConsoleApp
                     try
                     {
                         Enum.TryParse(Console.ReadLine(), out Command command);
-                        Program.ExecuteCommand(command);
+                        Program.ExecuteCommand(command, telemetryClient);
                     }
                     catch (Exception e)
                     {
+                        telemetryClient.TrackException(e);
                         Console.WriteLine(e);
                         Console.WriteLine();
                     }
-                    
+                    finally
+                    {
+                        telemetryClient.Flush();
+                    }
                 }
             }
         }
 
-        private static void ExecuteCommand(Command command)
+        private static void ExecuteCommand(Command command, TelemetryClient telemetryClient)
         {
             switch (command)
             {
@@ -45,8 +51,10 @@ namespace DotNet.ConsoleApp
                     break;
 
                 case Command.Close:
+                    telemetryClient.Flush();
                     Console.WriteLine("Press any key to close the app.");
                     Console.ReadLine();
+                    Task.Delay(2000).Wait();
                     Environment.Exit(0);
                     break;
 
