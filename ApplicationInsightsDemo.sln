@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetCore", "DotNetCore", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCore.Web.API", "src\DotNetCore\DotNetCore.Web.API\DotNetCore.Web.API.csproj", "{CA47D284-7F66-47A9-B7B4-21D8EFDE7F54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.ConsoleApp", "src\DotNet\DotNet.ConsoleApp\DotNet.ConsoleApp.csproj", "{87512A45-509C-43D2-8BE3-983FEDC42304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{CA47D284-7F66-47A9-B7B4-21D8EFDE7F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA47D284-7F66-47A9-B7B4-21D8EFDE7F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA47D284-7F66-47A9-B7B4-21D8EFDE7F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87512A45-509C-43D2-8BE3-983FEDC42304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87512A45-509C-43D2-8BE3-983FEDC42304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87512A45-509C-43D2-8BE3-983FEDC42304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87512A45-509C-43D2-8BE3-983FEDC42304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CA47D284-7F66-47A9-B7B4-21D8EFDE7F54} = {C5FB484C-7C50-400A-AC43-C0E0D857BD04}
+		{87512A45-509C-43D2-8BE3-983FEDC42304} = {3F135778-3395-4B5F-8126-E5CF6C8E68BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7588344A-A911-4818-B7AE-7517E2615A30}
