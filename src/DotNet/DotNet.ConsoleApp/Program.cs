@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
+using NLog;
 
 namespace DotNet.ConsoleApp
 {
@@ -20,7 +21,8 @@ namespace DotNet.ConsoleApp
                 while (true)
                 {
                     Console.WriteLine("<1>: Buy");
-                    Console.WriteLine("<2>: Exit");
+                    Console.WriteLine("<2>: Sell");
+                    Console.WriteLine("<3>: Exit");
                     Console.WriteLine();
                     Console.Write("Please select a command to execute: ");
                     try
@@ -48,6 +50,10 @@ namespace DotNet.ConsoleApp
             {
                 case Command.Buy:
                     Program.Buy();
+                    break;
+
+                case Command.Sell:
+                    Program.Sell();
                     break;
 
                 case Command.Close:
@@ -98,6 +104,22 @@ namespace DotNet.ConsoleApp
 
         private static void Buy()
         {
+            throw new Exception("The Buy command has failed.");
+        }
+
+        private static void Sell()
+        {
+            Console.WriteLine("Test NLog.");
+
+            var logger = LogManager.GetLogger("ApplicationInsightsDemo");
+
+            logger.Trace("Using nLog to write a 'trace' message");
+            logger.Debug("Using nLog to write a 'debug' message");
+            logger.Info("Using nLog to write an 'info' message");
+            logger.Warn("Using nLog to write a 'warning' message");
+            logger.Error("Using nLog to write an 'error' message");
+            logger.Fatal("Using nLog to write a 'fatal' message");
+
             throw new Exception("The Buy command has failed.");
         }
     }
