@@ -1,4 +1,5 @@
-﻿using Microsoft.ApplicationInsights.DependencyCollector;
+﻿using System;
+using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 
 namespace DotNet.ConsoleApp
@@ -9,8 +10,52 @@ namespace DotNet.ConsoleApp
         {
             using (Program.GetApplicationInsightsModule())
             {
-                
+                Console.WriteLine("Application Insights Demo");
+                Console.WriteLine("=========================");
+                Console.WriteLine();
+
+
+                while (true)
+                {
+                    Console.WriteLine("<1>: Buy");
+                    Console.WriteLine("<2>: Exit");
+                    Console.WriteLine();
+                    Console.Write("Please select a command to execute: ");
+                    try
+                    {
+                        Enum.TryParse(Console.ReadLine(), out Command command);
+                        Program.ExecuteCommand(command);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Console.WriteLine();
+                    }
+                    
+                }
             }
+        }
+
+        private static void ExecuteCommand(Command command)
+        {
+            switch (command)
+            {
+                case Command.Buy:
+                    Program.Buy();
+                    break;
+
+                case Command.Close:
+                    Console.WriteLine("Press any key to close the app.");
+                    Console.ReadLine();
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("No command has been executed.");
+                    break;
+            }
+            
+            Console.WriteLine();
         }
 
         private static DependencyTrackingTelemetryModule GetApplicationInsightsModule()
@@ -41,6 +86,11 @@ namespace DotNet.ConsoleApp
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new HttpDependenciesParsingTelemetryInitializer());
 
             return module;
+        }
+
+        private static void Buy()
+        {
+            throw new Exception("The Buy command has failed.");
         }
     }
 }
