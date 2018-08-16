@@ -7,13 +7,13 @@ namespace DotNet.API.Controllers
     public class ValuesController : ApiController
     {
         [HttpGet]
-        [Route("values")]
-        public IHttpActionResult Get()
+        [Route("divide-handled")]
+        public IHttpActionResult DivideHandled()
         {
             try
             {
-                this.GetValue();
-                return Ok();
+                var result = this.Divide(10, 0);
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -21,9 +21,17 @@ namespace DotNet.API.Controllers
             }
         }
 
-        private string GetValue()
+        [HttpGet]
+        [Route("divide-unhandled")]
+        public IHttpActionResult DivideUnhandled()
         {
-            throw new NotImplementedException("This endpoint has not yet been implemented.");
+            var result = this.Divide(10, 0);
+            return Ok(result);
+        }
+
+        private int Divide(int numerator, int denominator)
+        {
+            return numerator / denominator;
         }
     }
 }
